@@ -37,6 +37,8 @@ Trainthon 해커톤 MVP (2026-09-09~10, 최종 피칭 9/10 10:00). 앱 코드는
 
 ## Run
 
+**Production:** https://trainthon-myhr.vercel.app — 재배포: `npx vercel --prod`
+
 ```
 cp .env.local.example .env.local   # GEMINI_API_KEY, SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, DATABASE_URL 채우기
 npm install
