@@ -65,3 +65,54 @@ export async function contextPeople(): Promise<(PersonRow & { attributes: { key:
   const people = ok<PersonRow[]>(await db.from("people").select(PERSON_COLS).in("id", [...byPerson.keys()]).order("name"));
   return people.map((p) => ({ ...p, attributes: byPerson.get(p.id) ?? [] }));
 }
+
+// 맥락 있는 사람들 사이의 엣지. LLM 프롬프트에 관계 정보로 넣는다.
+export async function contextEdges(): Promise<{ from_id: string; to_id: string; label: string }[]> {
+  return ok(await db.from("relationships").select("from_id,to_id,label"));
+}
+
+export type AskMatch = { id: string; name: string; photo_url: string | null; one_liner: string | null; evidence: string };
+
+// SQL 와우: key=value 현재값을 가진 사람 + 근거(그 사실을 만든 노트 원문). limit은 상위 N.
+export async function attributeMatch(key: string, value: string, limit?: number): Promise<AskMatch[]> {
+  const attrs = ok<{ person_id: string; source: number | null }[]>(
+    await db.from("current_attributes").select("person_id,source").eq("key", key).eq("value", value),
+  );
+  if (!attrs.length) return [];
+  const sourceOf = new Map(attrs.map((a) => [a.person_id, a.source]));
+  const noteIds = attrs.flatMap((a) => (a.source ? [a.source] : []));
+  const people = ok<PersonRow[]>(
+    await db.from("people").select(PERSON_COLS).in("id", [...sourceOf.keys()]).order("name"),
+  );
+  const notes = noteIds.length
+    ? ok<{ id: number; raw_text: string }[]>(await db.from("notes").select("id,raw_text").in("id", noteIds))
+    : [];
+  const noteOf = new Map(notes.map((n) => [n.id, n.raw_text]));
+  const out = people.map((p) => ({
+    id: p.id,
+    name: p.name,
+    photo_url: p.photo_url,
+    one_liner: p.one_liner,
+    evidence: noteOf.get(sourceOf.get(p.id) ?? -1) ?? p.one_liner ?? `${key}=${value}`,
+  }));
+  return limit ? out.slice(0, limit) : out;
+}
+
+export async function peopleByIds(ids: string[]): Promise<PersonRow[]> {
+  if (!ids.length) return [];
+  return ok(await db.from("people").select(PERSON_COLS).in("id", ids));
+}
+
+// 나(me)와 이 사람 둘 다와 연결된 사람(공통 지인). relationships 양방향 교집합.
+export async function mutuals(id: string): Promise<{ id: string; name: string }[]> {
+  const neighborsOf = async (pid: string) => {
+    const rels = ok<{ from_id: string; to_id: string }[]>(
+      await db.from("relationships").select("from_id,to_id").or(`from_id.eq.${pid},to_id.eq.${pid}`),
+    );
+    return new Set(rels.map((r) => (r.from_id === pid ? r.to_id : r.from_id)));
+  };
+  const [mine, theirs] = await Promise.all([neighborsOf("me"), neighborsOf(id)]);
+  const common = [...mine].filter((x) => theirs.has(x) && x !== "me" && x !== id);
+  if (!common.length) return [];
+  return ok(await db.from("people").select("id,name").in("id", common));
+}

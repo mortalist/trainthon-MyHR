@@ -41,3 +41,8 @@ export const AskResult = z.object({
   people: z.array(z.object({ id: z.string(), evidence: z.string() })),
 });
 export type AskResult = z.infer<typeof AskResult>;
+
+// /api/ask 응답 = AskResult + 이름 조회(클라이언트가 2번째 왕복 없이 이름/한줄을 렌더).
+export type AskResponse = AskResult & {
+  names: Record<string, { name: string; photo_url: string | null; one_liner: string | null }>;
+};

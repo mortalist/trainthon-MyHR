@@ -2,7 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Badge } from "@/components/ui/badge";
 import { Avatar } from "@/components/contact-list";
-import { getPerson } from "@/lib/queries";
+import { getPerson, mutuals } from "@/lib/queries";
 
 const SOURCE_LABEL: Record<string, string> = { seed: "시드", kakao_screenshot: "카톡 캡처", text: "메모", voice: "음성" };
 
@@ -10,6 +10,9 @@ export default async function PersonPage({ params }: PageProps<"/person/[id]">) 
   const { id } = await params;
   const p = await getPerson(id);
   if (!p) notFound();
+
+  const common = await mutuals(id);
+  const meEdges = p.neighbors.filter((n) => n.id === "me");
 
   return (
     <div className="flex h-full flex-col overflow-y-auto">
@@ -46,9 +49,22 @@ export default async function PersonPage({ params }: PageProps<"/person/[id]">) 
         </dl>
       </Section>
 
-      {/* 5단계: relationships 양방향 교집합(me ∩ 이 사람)으로 채운다 */}
+      {p.id !== "me" && (
+        <Section title="어떻게 아는 사이">
+          {meEdges.length === 0 ? <Empty /> : <p className="text-sm">{meEdges.map((e) => e.label).join(", ")}</p>}
+        </Section>
+      )}
+
+      {/* relationships 양방향 교집합(me ∩ 이 사람) */}
       <Section title="공통 지인">
-        <Empty />
+        {common.length === 0 && <Empty />}
+        <div className="flex flex-wrap gap-1.5">
+          {common.map((m) => (
+            <Link key={m.id} href={`/person/${m.id}`} className="rounded-full border px-3 py-1 text-xs hover:bg-muted">
+              {m.name}
+            </Link>
+          ))}
+        </div>
       </Section>
 
       <Section title="노트">
