@@ -18,29 +18,29 @@ export const me = { id: "me", name: "나" };
 
 export const people: SeedPerson[] = [
   {
-    id: "p01", name: "김재희", tags: ["연끌", "트레인톤"],
-    one_liner: "핀테크 스타트업 다니는 연끌 후배, 풋살 잘함",
+    id: "p01", name: "김재희", tags: ["주식동아리", "트레인톤"],
+    one_liner: "핀테크 스타트업 다니는 주식동아리 후배, 풋살 잘함",
     notes: [
-      ["민수 소개로 연끌 모임에서 처음 봄. 초기 핀테크 스타트업 다닌다고.", { works_at: "핀테크 스타트업", met_at: "연끌 모임" }],
+      ["민수 소개로 주식동아리 모임에서 처음 봄. 초기 핀테크 스타트업 다닌다고.", { works_at: "핀테크 스타트업", met_at: "주식동아리 모임" }],
       ["재희 매운거 엄청 좋아함. 불닭 소스 따로 들고 다님", { likes_spicy: "true" }],
       ["재희랑 풋살 뛰었는데 잘하더라. 주말마다 뛴다고", { plays_soccer: "true" }],
       ["다음 트레인톤 나온대. 결제 인프라 쪽 아이템", { interested_in: "결제 인프라" }],
     ],
   },
   {
-    id: "p02", name: "박민수", tags: ["연끌"],
-    one_liner: "연끌 동기, 재희 소개해준 사람. 풋살 팀 주장",
+    id: "p02", name: "박민수", tags: ["주식동아리"],
+    one_liner: "주식동아리 동기, 재희 소개해준 사람. 풋살 팀 주장",
     notes: [
-      ["연끌 1기 동기. 경영학과.", { university: "연세대", major: "경영학" }],
+      ["주식동아리 1기 동기. 경영학과.", { university: "연세대", major: "경영학" }],
       ["민수도 축구 함. 동아리 풋살 팀 주장", { plays_soccer: "true" }],
       ["요즘 B2B SaaS 스타트업에서 세일즈 인턴 중", { works_at: "B2B SaaS 스타트업" }],
     ],
   },
   {
-    id: "p03", name: "이서준", tags: ["매연"],
-    one_liner: "매연 운영진. 신촌 살아서 모임 장소 담당",
+    id: "p03", name: "이서준", tags: ["농구동아리"],
+    one_liner: "농구동아리 운영진. 신촌 살아서 모임 장소 담당",
     notes: [
-      ["매연 운영진. 신촌 살아서 모임 장소 잡아줌", { lives_in: "신촌" }],
+      ["농구동아리 운영진. 신촌 살아서 모임 장소 잡아줌", { lives_in: "신촌" }],
       ["축구 매주 일요일 뛴다", { plays_soccer: "true" }],
       ["매운 거 못 먹음. 신라면도 힘들어함", { likes_spicy: "false" }],
     ],
@@ -55,27 +55,27 @@ export const people: SeedPerson[] = [
     ],
   },
   {
-    id: "p05", name: "최우진", tags: ["트레인톤", "연끌"],
-    one_liner: "연끌 해커톤 같은 팀. 백엔드(Go)",
+    id: "p05", name: "최우진", tags: ["트레인톤", "주식동아리"],
+    one_liner: "주식동아리 해커톤 같은 팀. 백엔드(Go)",
     notes: [
-      ["연끌 해커톤에서 같은 팀. 백엔드(Go) 담당", { skill: "백엔드 개발", met_at: "연끌 해커톤" }],
+      ["주식동아리 해커톤에서 같은 팀. 백엔드(Go) 담당", { skill: "백엔드 개발", met_at: "주식동아리 해커톤" }],
       ["축구 안 함, 대신 러닝 함", { plays_soccer: "false", hobby: "러닝" }],
     ],
   },
   {
-    id: "p06", name: "강민준", tags: ["매연", "트레인톤"],
-    one_liner: "매연 후배. 무릎 부상으로 축구 쉬는 중",
+    id: "p06", name: "강민준", tags: ["농구동아리", "트레인톤"],
+    one_liner: "농구동아리 후배. 무릎 부상으로 축구 쉬는 중",
     notes: [
-      ["매연 신입. 컴공", { university: "연세대", major: "컴퓨터공학" }],
+      ["농구동아리 신입. 컴공", { university: "연세대", major: "컴퓨터공학" }],
       ["축구 동아리에서 봄. 미드필더", { plays_soccer: "true" }],
       ["무릎 십자인대 다쳐서 올해 축구 못 뛴다고", { plays_soccer: "false" }],
     ],
   },
   {
-    id: "p07", name: "윤지호", tags: ["연끌"],
-    one_liner: "연끌 3기 선배. 초기 VC 심사역",
+    id: "p07", name: "윤지호", tags: ["주식동아리"],
+    one_liner: "주식동아리 3기 선배. 초기 VC 심사역",
     notes: [
-      ["연끌 3기 선배. 지금 초기 단계 VC 심사역", { works_at: "초기 단계 VC" }],
+      ["주식동아리 3기 선배. 지금 초기 단계 VC 심사역", { works_at: "초기 단계 VC" }],
       ["커피챗 하자고 함. 컨슈머 앱 관심", { interested_in: "컨슈머 앱" }],
     ],
   },
@@ -96,17 +96,17 @@ export const people: SeedPerson[] = [
     ],
   },
   {
-    id: "p10", name: "송현우", tags: ["매연"],
-    one_liner: "매연 회장. 풋살 골키퍼",
+    id: "p10", name: "송현우", tags: ["농구동아리"],
+    one_liner: "농구동아리 회장. 풋살 골키퍼",
     notes: [
-      ["매연 회장. 성격 좋음", { role: "매연 회장" }],
+      ["농구동아리 회장. 성격 좋음", { role: "농구동아리 회장" }],
       ["풋살 팀 골키퍼", { plays_soccer: "true" }],
       ["마포 살아서 상암 풋살장 자주 감", { lives_in: "마포" }],
     ],
   },
   {
-    id: "p11", name: "오세훈", tags: ["연끌", "매연"],
-    one_liner: "연끌+매연. 마케팅 프리랜서",
+    id: "p11", name: "오세훈", tags: ["주식동아리", "농구동아리"],
+    one_liner: "주식동아리+농구동아리. 마케팅 프리랜서",
     notes: [
       ["마케팅 프리랜서. 인스타 광고 잘 돌림", { works_at: "프리랜서 마케터" }],
       ["축구 함. 주로 수비", { plays_soccer: "true" }],
@@ -131,18 +131,18 @@ export const people: SeedPerson[] = [
     ],
   },
   {
-    id: "p14", name: "박서연", tags: ["연끌"],
-    one_liner: "연끌 동기, 브랜딩 디자이너",
+    id: "p14", name: "박서연", tags: ["주식동아리"],
+    one_liner: "주식동아리 동기, 브랜딩 디자이너",
     notes: [
-      ["연끌 1기. 브랜딩 디자이너", { skill: "브랜딩 디자인" }],
+      ["주식동아리 1기. 브랜딩 디자이너", { skill: "브랜딩 디자인" }],
       ["강남에서 자취", { lives_in: "강남" }],
     ],
   },
   {
-    id: "p15", name: "조현준", tags: ["매연"],
-    one_liner: "매연 총무. CPA 준비",
+    id: "p15", name: "조현준", tags: ["농구동아리"],
+    one_liner: "농구동아리 총무. CPA 준비",
     notes: [
-      ["매연 총무. CPA 준비 중", { interested_in: "CPA" }],
+      ["농구동아리 총무. CPA 준비 중", { interested_in: "CPA" }],
       ["축구 함", { plays_soccer: "true" }],
     ],
   },
@@ -155,10 +155,10 @@ export const people: SeedPerson[] = [
     ],
   },
   {
-    id: "p17", name: "신동욱", tags: ["연끌", "트레인톤"],
-    one_liner: "연끌 2기 후배. 프론트엔드",
+    id: "p17", name: "신동욱", tags: ["주식동아리", "트레인톤"],
+    one_liner: "주식동아리 2기 후배. 프론트엔드",
     notes: [
-      ["연끌 2기. 프론트엔드(React)", { skill: "프론트엔드 개발" }],
+      ["주식동아리 2기. 프론트엔드(React)", { skill: "프론트엔드 개발" }],
       ["축구 함. 재희랑 같은 풋살 모임", { plays_soccer: "true" }],
     ],
   },
@@ -171,11 +171,11 @@ export const people: SeedPerson[] = [
     ],
   },
   {
-    id: "p19", name: "류태양", tags: ["매연"],
-    one_liner: "매연 OB. 광고대행사 AE",
+    id: "p19", name: "류태양", tags: ["농구동아리"],
+    one_liner: "농구동아리 OB. 광고대행사 AE",
     notes: [
-      ["매연 OB. 광고대행사 AE", { works_at: "광고대행사" }],
-      ["축구 함. 매연 OB 팀", { plays_soccer: "true" }],
+      ["농구동아리 OB. 광고대행사 AE", { works_at: "광고대행사" }],
+      ["축구 함. 농구동아리 OB 팀", { plays_soccer: "true" }],
       ["매운 거 잘 먹음", { likes_spicy: "true" }],
     ],
   },
@@ -188,18 +188,18 @@ export const people: SeedPerson[] = [
     ],
   },
   {
-    id: "p21", name: "배준서", tags: ["연끌"],
-    one_liner: "연끌 동기. 로스쿨 준비, 공격수",
+    id: "p21", name: "배준서", tags: ["주식동아리"],
+    one_liner: "주식동아리 동기. 로스쿨 준비, 공격수",
     notes: [
-      ["연끌 1기. 로스쿨 준비 중", { interested_in: "로스쿨" }],
+      ["주식동아리 1기. 로스쿨 준비 중", { interested_in: "로스쿨" }],
       ["축구 함. 공격수", { plays_soccer: "true" }],
     ],
   },
   {
-    id: "p22", name: "안유나", tags: ["매연", "셰플러"],
-    one_liner: "매연 OB, 셰플러 재무팀 현직",
+    id: "p22", name: "안유나", tags: ["농구동아리", "셰플러"],
+    one_liner: "농구동아리 OB, 셰플러 재무팀 현직",
     notes: [
-      ["매연 OB인데 셰플러 재무팀 다님", { works_at: "셰플러", team: "재무" }],
+      ["농구동아리 OB인데 셰플러 재무팀 다님", { works_at: "셰플러", team: "재무" }],
       ["매운 거 못 먹음", { likes_spicy: "false" }],
     ],
   },
@@ -212,16 +212,16 @@ export const people: SeedPerson[] = [
     ],
   },
   {
-    id: "p24", name: "노하은", tags: ["연끌"],
-    one_liner: "연끌 2기 후배. PM 지망",
+    id: "p24", name: "노하은", tags: ["주식동아리"],
+    one_liner: "주식동아리 2기 후배. PM 지망",
     notes: [
-      ["연끌 2기. PM 인턴 경험", { interested_in: "PM" }],
+      ["주식동아리 2기. PM 인턴 경험", { interested_in: "PM" }],
       ["재희 소개로 알게 됨", { met_at: "재희 소개" }],
     ],
   },
   {
-    id: "p25", name: "황민재", tags: ["매연"],
-    one_liner: "매연 후배. 체육교육과, 축구 잘함",
+    id: "p25", name: "황민재", tags: ["농구동아리"],
+    one_liner: "농구동아리 후배. 체육교육과, 축구 잘함",
     notes: [
       ["체육교육과. 축구 잘함", { major: "체육교육", plays_soccer: "true" }],
       ["판교 살음", { lives_in: "판교" }],
@@ -236,27 +236,27 @@ export const people: SeedPerson[] = [
     ],
   },
   {
-    id: "p27", name: "김나연", tags: ["트레인톤", "연끌"],
+    id: "p27", name: "김나연", tags: ["트레인톤", "주식동아리"],
     one_liner: "트레인톤 팀원. 데이터 분석",
     notes: [
       ["데이터 분석. SQL 잘함", { skill: "데이터 분석" }],
-      ["연끌 2기", { met_at: "연끌" }],
+      ["주식동아리 2기", { met_at: "주식동아리" }],
     ],
   },
   {
-    id: "p28", name: "이준혁", tags: ["매연"],
-    one_liner: "매연 동기. 화학과 대학원, 배터리",
+    id: "p28", name: "이준혁", tags: ["농구동아리"],
+    one_liner: "농구동아리 동기. 화학과 대학원, 배터리",
     notes: [
       ["화학과 대학원. 배터리", { major: "화학", interested_in: "배터리" }],
       ["축구 안 함", { plays_soccer: "false" }],
     ],
   },
   {
-    id: "p29", name: "정승현", tags: ["연끌"],
-    one_liner: "연끌 OB. 에듀테크 스타트업 대표",
+    id: "p29", name: "정승현", tags: ["주식동아리"],
+    one_liner: "주식동아리 OB. 에듀테크 스타트업 대표",
     notes: [
-      ["연끌 OB. 에듀테크 스타트업 대표", { works_at: "에듀테크 스타트업" }],
-      ["축구 함. 연끌 풋살 만든 사람", { plays_soccer: "true" }],
+      ["주식동아리 OB. 에듀테크 스타트업 대표", { works_at: "에듀테크 스타트업" }],
+      ["축구 함. 주식동아리 풋살 만든 사람", { plays_soccer: "true" }],
     ],
   },
   {

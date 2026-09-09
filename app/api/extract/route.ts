@@ -14,7 +14,7 @@ const SYSTEM = `당신은 개인 인맥 노트의 정보 추출기다. 카톡 �
 - 대화 속에서 언급만 된 제3자(예: 「민수가 소개해줬어」의 민수)는 people에 넣지 않는다. edges의 끝점으로만 쓴다.
 - 이름이 [기존 사람 목록]의 이름과 같으면 새 사람을 만들지 말고 그 id를 쓴다(entity resolution). 목록에 없으면 id는 null.
 - one_liner: 목록에 보일 짧은 한국어 한 문장 (예: 「핀테크 스타트업 백엔드, 매운 거 좋아함」).
-- tags: 방 제목·문맥으로 커뮤니티가 분명할 때만 연끌 / 매연 / 셰플러 / 트레인톤 중에서. 아니면 빈 배열. 방 제목에 「트레인톤」「연끌」「셰플러」「매연」이 있으면 참가자 전원 tags에 넣고, 각 사람에게 met_at도 같은 값으로 만든다.
+- tags: 방 제목·문맥으로 커뮤니티가 분명할 때만 주식동아리 / 농구동아리 / 셰플러 / 트레인톤 중에서. 아니면 빈 배열. 방 제목에 「트레인톤」「주식동아리」「셰플러」「농구동아리」가 있으면 참가자 전원 tags에 넣고, 각 사람에게 met_at도 같은 값으로 만든다.
 
 [속성 attributes] 한 줄 = 사실 하나. person에는 그 사람의 id(기존) 또는 이름(신규)을 쓴다.
 - key는 반드시 [속성 키 목록]에 있는 키를 재사용한다. 목록의 어떤 키로도 표현할 수 없는 진짜 새로운 개념일 때만 새 키를 만든다 (영어 snake_case).
@@ -45,7 +45,7 @@ const KEY_ALIASES: Record<string, string> = {
   city: "lives_in",
 };
 
-const COMMUNITY_TAGS = ["연끌", "매연", "셰플러", "트레인톤"] as const;
+const COMMUNITY_TAGS = ["주식동아리", "농구동아리", "셰플러", "트레인톤"] as const;
 
 export async function POST(req: Request) {
   const t0 = Date.now();

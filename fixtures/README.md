@@ -53,7 +53,7 @@ Edges:
 
 ---
 
-## kakao/02-yeonkkeul — room title 「연끌 12기 스터디」 (4)
+## kakao/02-yeonkkeul — room title 「주식동아리 12기 스터디」 (4)
 
 Date pill: 2026년 9월 7일 월요일.
 
@@ -94,7 +94,7 @@ Edges: none expected.
 
 ---
 
-## kakao/04-maeyeon — room title 「매연 9월 네트워킹」 (4)
+## kakao/04-maeyeon — room title 「농구동아리 9월 네트워킹」 (4)
 
 Date pill: 2026년 9월 8일 화요일. 명함 교환 context.
 
@@ -103,15 +103,15 @@ Date pill: 2026년 9월 8일 화요일. 명함 교환 context.
 | 윤서아 | `works_at` | 네이버 |
 | 윤서아 | `job_title` | PM / 프로덕트 매니저 |
 | 윤서아 | `interested_in` | 러닝 |
-| 윤서아 | `met_at` | 매연 (9월 네트워킹) |
+| 윤서아 | `met_at` | 농구동아리 (9월 네트워킹) |
 | 장하람 | `works_at` | 스튜디오 하람 |
 | 장하람 | `job_title` | 대표 |
 | 장하람 | `interested_in` / `industry` | 브랜딩 |
 | 장하람 | `office_in` / `works_in` | 성수동 (optional) |
-| 장하람 | `met_at` | 매연 |
+| 장하람 | `met_at` | 농구동아리 |
 | 권도현 | `works_at` | 노스스타벤처스 |
 | 권도현 | `job_title` | 심사역 |
-| 권도현 | `met_at` | 매연 |
+| 권도현 | `met_at` | 농구동아리 |
 
 Edges: none expected.
 

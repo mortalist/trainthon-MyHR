@@ -8,7 +8,7 @@ import { AiSearchResults } from "@/components/ai-search-results";
 import { AskSheet } from "@/components/ask-sheet";
 import type { PersonRow } from "@/lib/queries";
 
-const TAGS = ["연끌", "매연", "셰플러", "트레인톤"];
+const TAGS = ["주식동아리", "농구동아리", "셰플러", "트레인톤"];
 
 export function ContactList({ people }: { people: PersonRow[] }) {
   const [tag, setTag] = useState<string | null>(null);
