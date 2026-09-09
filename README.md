@@ -1,51 +1,31 @@
-# Hackathon agent setup
+# MyHR
 
-Empty project with coding-agent rules and skills installed **before** the app exists.
+**당신은 당신 네트워크의 CEO다. MyHR은 그 회사의 인사팀이다.**
 
-Installed:
+전화번호부는 이름과 번호만 남긴다. 개인 CRM은 직접 적어야 해서 죽는다. MyHR은 카톡 캡처·짧은 메모를 던지면 AI가 **사실 한 줄**로 잘라 저장하고, 나중에 「매운거 잘 먹음」이나 「주말 축구 11명」을 검색·질문으로 꺼내는 **개인용 인맥 기억 레이어**다.
 
-- **Karpathy guidelines** — always-on Cursor rule + skill, from [forrestchang/andrej-karpathy-skills](https://github.com/forrestchang/andrej-karpathy-skills) (`2c60614`)
-- **Ponytail** — always-on Cursor rule + six skills, from [DietrichGebert/ponytail](https://github.com/DietrichGebert/ponytail) (`356918e`)
+앱을 열면 평범한 연락처 목록이다. 차이는 검색이 된다는 것 하나다.
 
-## What is always on
+상세 스펙(문제, 데이터, 화면, 데모, 스택, 빌드 순서): **[docs/PRODUCT.md](docs/PRODUCT.md)**
 
-Cursor project rules (`alwaysApply: true`):
+## Status
 
-| File | Role |
+Trainthon 해커톤 MVP. 앱 코드는 아직 없다. 제품 정의는 [docs/PRODUCT.md](docs/PRODUCT.md).
+
+의도한 GitHub: [github.com/mortalist/trainthon-MyHR](https://github.com/mortalist/trainthon-MyHR)
+
+## v1 in one page
+
+| | |
 | --- | --- |
-| `.cursor/rules/karpathy-guidelines.mdc` | Think before coding, simplicity first, surgical diffs, verifiable goals |
-| `.cursor/rules/ponytail.mdc` | Lazy-senior ladder: skip, reuse, stdlib, native, one line, then minimum |
+| Who | 네트워킹이 빠른 대학생·창업가 (첫 사용자는 본인 데모 그래프) |
+| Shell | 390px 폰 프레임 웹. 로그인·온보딩·설정 없음 |
+| Input | 텍스트 + 카톡/명함 이미지 붙여넣기. 음성은 UI만, API는 시간 남으면 |
+| Save | `/extract` → 사람 단위 스와이프 승인 후에만 DB에 씀 |
+| Facts | `attributes(person_id, key, value, source)` — 컬럼을 늘리지 않고 **행을 늘림** |
+| Wow | 「매운거 잘 먹음」검색 또는 「축구 11명」질문 |
+| Not in v1 | 폰/구글 주소록 동기화, RAG, 멀티유저, 그래프 필수 화면 |
 
-## Skills
+## Run
 
-Same content is in `.cursor/skills/` (Cursor) and `.agents/skills/` (`npx skills`).
-
-| Skill | When to use |
-| --- | --- |
-| `karpathy-guidelines` | Writing, reviewing, or refactoring without overcomplicating |
-| `ponytail` | Force the shortest working solution (`lite` / `full` / `ultra`) |
-| `ponytail-review` | Review the current diff for over-engineering |
-| `ponytail-audit` | Audit the whole repo, not just the diff |
-| `ponytail-debt` | Harvest deferred `ponytail:` shortcuts |
-| `ponytail-gain` | Show measured impact numbers |
-| `ponytail-help` | Command cheat sheet |
-
-In Cursor, mention the skill name in chat (for example “run ponytail-review on this diff”).
-
-## Update
-
-From the repo root:
-
-```bash
-npx skills add forrestchang/andrej-karpathy-skills --skill karpathy-guidelines --agent cursor --copy -y
-npx skills add https://github.com/DietrichGebert/ponytail/tree/main/skills --skill '*' --agent cursor --copy -y
-cp -a .agents/skills/. .cursor/skills/
-```
-
-Then refresh the two `.cursor/rules/*.mdc` files from those upstream repos if the always-on rules changed.
-
-## License
-
-Upstream material is MIT. Ponytail’s license is in `vendor-licenses/ponytail.LICENSE`. Karpathy guidelines declare MIT in the skill frontmatter.
-
-This repo does not contain an application yet. Add the hackathon product next.
+앱이 생기면 여기에 `npm install` / `npm run dev`를 적는다. 지금은 문서만 있다.
