@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=390, initial-scale=1">
+<title>셰플러 FC</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 390px; height: 844px; overflow: hidden; background: #b2c7d9; }
+  body { font-family: "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", sans-serif; color: #000; -webkit-font-smoothing: antialiased; }
+  .phone { width: 390px; height: 844px; display: flex; flex-direction: column; background: #b2c7d9; }
+  .status { height: 44px; display: flex; align-items: flex-end; justify-content: space-between; padding: 0 22px 8px 28px; font-size: 15px; font-weight: 600; color: #1a1a1a; }
+  .status .r { display: flex; align-items: center; gap: 6px; }
+  .status svg { display: block; }
+  .top { height: 50px; display: flex; align-items: center; padding: 0 12px 0 8px; }
+  .top .back { width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; }
+  .top .title { flex: 1; display: flex; align-items: baseline; gap: 6px; margin-left: 2px; }
+  .top .title b { font-size: 17px; font-weight: 600; letter-spacing: -0.3px; }
+  .top .title span { font-size: 15px; color: #6b7b8a; font-weight: 500; }
+  .top .icons { display: flex; gap: 18px; align-items: center; }
+  .chat { flex: 1; min-height: 0; overflow: hidden; padding: 4px 10px 4px 10px; display: flex; flex-direction: column; justify-content: flex-end; }
+  .date { display: flex; justify-content: center; margin: 4px 0 10px; }
+  .date span { background: rgba(0,0,0,0.12); color: #fff; font-size: 11.5px; padding: 4px 12px; border-radius: 12px; display: inline-flex; align-items: center; gap: 4px; }
+  .msg { display: flex; align-items: flex-start; margin-bottom: 6px; }
+  .msg.left .avatar { width: 36px; height: 36px; border-radius: 14px; color: #fff; font-size: 15px; font-weight: 600; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-right: 8px; }
+  .msg.left.cont .avatar { visibility: hidden; height: 0; }
+  .msg.left.cont { margin-top: -3px; }
+  .body { display: flex; flex-direction: column; max-width: 336px; }
+  .name { font-size: 11.5px; color: #4a5560; margin-bottom: 3px; margin-left: 1px; }
+  .row { display: flex; align-items: flex-end; gap: 5px; }
+  .bubble { position: relative; padding: 6.5px 10px; border-radius: 14px; font-size: 13px; line-height: 1.35; letter-spacing: -0.2px; word-break: keep-all; white-space: pre-line; }
+  .left .bubble { background: #fff; border-top-left-radius: 3px; }
+  .left.cont .bubble { border-top-left-radius: 14px; }
+  .right { justify-content: flex-end; }
+  .right .bubble { background: #fee500; border-top-right-radius: 3px; max-width: 300px; }
+  .right.cont .bubble { border-top-right-radius: 14px; }
+  .meta { display: flex; flex-direction: column; align-items: flex-start; font-size: 10.5px; color: #5c6a75; line-height: 1.2; padding-bottom: 1px; white-space: nowrap; }
+  .right .meta { align-items: flex-end; }
+  .meta .unread { color: #f7d800; font-weight: 700; font-size: 10.5px; }
+  .input { height: 54px; background: #fff; display: flex; align-items: center; padding: 0 10px 0 12px; gap: 10px; }
+  .input .field { flex: 1; height: 36px; background: #fff; border-radius: 18px; display: flex; align-items: center; padding: 0 12px; font-size: 14px; color: #bbb; }
+  .input svg { display: block; flex-shrink: 0; }
+</style>
+</head>
+<body>
+<div class="phone">
+  <div class="status">
+    <span>10:05</span>
+    <span class="r">
+      <svg width="17" height="11" viewBox="0 0 17 11"><rect x="0" y="7" width="3" height="4" rx="0.7" fill="#000"/><rect x="4.5" y="5" width="3" height="6" rx="0.7" fill="#000"/><rect x="9" y="2.5" width="3" height="8.5" rx="0.7" fill="#000"/><rect x="13.5" y="0" width="3" height="11" rx="0.7" fill="#000"/></svg>
+      <span style="font-size:12px;font-weight:700">5G</span>
+      <svg width="27" height="13" viewBox="0 0 27 13"><rect x="0.5" y="0.5" width="23" height="12" rx="3.5" stroke="#000" stroke-opacity="0.4" fill="none"/><rect x="2" y="2" width="17" height="9" rx="2" fill="#000"/><rect x="25" y="4" width="1.5" height="5" rx="0.7" fill="#000" fill-opacity="0.4"/></svg>
+    </span>
+  </div>
+  <div class="top">
+    <div class="back"><svg width="12" height="20" viewBox="0 0 12 20"><path d="M10 2 L2 10 L10 18" stroke="#1a1a1a" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div class="title"><b>셰플러 FC</b><span>4</span></div>
+    <div class="icons">
+      <svg width="21" height="21" viewBox="0 0 22 22"><circle cx="9.5" cy="9.5" r="6.5" stroke="#1a1a1a" stroke-width="2" fill="none"/><path d="M14.5 14.5 L20 20" stroke="#1a1a1a" stroke-width="2.2" stroke-linecap="round"/></svg>
+      <svg width="20" height="16" viewBox="0 0 20 16"><rect y="0" width="20" height="2.2" rx="1.1" fill="#1a1a1a"/><rect y="6.9" width="20" height="2.2" rx="1.1" fill="#1a1a1a"/><rect y="13.8" width="20" height="2.2" rx="1.1" fill="#1a1a1a"/></svg>
+    </div>
+  </div>
+
+  <div class="chat">
+    <div class="date"><span>2026년 9월 3일 목요일 <svg width="9" height="9" viewBox="0 0 10 10"><path d="M3 1 L7 5 L3 9" stroke="#fff" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg></span></div>
+
+    <div class="msg left">
+      <div class="avatar" style="background:#4f7cac">태</div>
+      <div class="body">
+        <div class="name">강태현</div>
+        <div class="row"><div class="bubble">토요일 오전 10시 축구 뛸 사람? 신촌 운동장 ⚽</div><div class="meta"><span class="time">오후 10:02</span></div></div>
+      </div>
+    </div>
+
+    <div class="msg left">
+      <div class="avatar" style="background:#c9736f">예</div>
+      <div class="body">
+        <div class="name">신예린</div>
+        <div class="row"><div class="bubble">나 감! 경영학과 중간 끝나서 시간 널널함</div><div class="meta"><span class="time">오후 10:03</span></div></div>
+      </div>
+    </div>
+
+    <div class="msg right">
+      <div class="meta"><span class="unread">2</span><span class="time">오후 10:03</span></div>
+      <div class="bubble">저도 갑니다 ⚽</div>
+    </div>
+
+    <div class="msg left">
+      <div class="avatar" style="background:#8a9a5b">민</div>
+      <div class="body">
+        <div class="name">조민재</div>
+        <div class="row"><div class="bubble">나 무릎 부상 아직이라 못 뛸 듯 ㅠ 재활 중이라 한 달은 쉬어야 함</div><div class="meta"><span class="time">오후 10:05</span></div></div>
+      </div>
+    </div>
+
+    <div class="msg left">
+      <div class="avatar" style="background:#4f7cac">태</div>
+      <div class="body">
+        <div class="name">강태현</div>
+        <div class="row"><div class="bubble">민재 무릎 조심해라 ㅠ 구경이나 와</div><div class="meta"><span class="time">오후 10:05</span></div></div>
+      </div>
+    </div>
+
+    <div class="msg left">
+      <div class="avatar" style="background:#8a9a5b">민</div>
+      <div class="body">
+        <div class="name">조민재</div>
+        <div class="row"><div class="bubble">ㅇㅇ 응원하러 갈게 컴공 과제 들고 ㅋㅋ</div><div class="meta"><span class="time">오후 10:06</span></div></div>
+      </div>
+    </div>
+
+    <div class="msg left">
+      <div class="avatar" style="background:#c9736f">예</div>
+      <div class="body">
+        <div class="name">신예린</div>
+        <div class="row"><div class="bubble">민재 컴공이었어? 나 고려대 경영인데 우리 학교 컴공이랑 팀플 해봤어 ㅋㅋ</div><div class="meta"><span class="time">오후 10:07</span></div></div>
+      </div>
+    </div>
+
+    <div class="msg left">
+      <div class="avatar" style="background:#8a9a5b">민</div>
+      <div class="body">
+        <div class="name">조민재</div>
+        <div class="row"><div class="bubble">ㅇㅇ 나 연대 컴공 3학년</div><div class="meta"><span class="time">오후 10:07</span></div></div>
+      </div>
+    </div>
+
+    <div class="msg left">
+      <div class="avatar" style="background:#4f7cac">태</div>
+      <div class="body">
+        <div class="name">강태현</div>
+        <div class="row"><div class="bubble">나도 연대 체교과 ㅋㅋ 그럼 토요일 10시 확정!</div><div class="meta"><span class="time">오후 10:08</span></div></div>
+      </div>
+    </div>
+
+    <div class="msg right">
+      <div class="meta"><span class="time">오후 10:09</span></div>
+      <div class="bubble">끝나고 밥은요?</div>
+    </div>
+
+    <div class="msg left">
+      <div class="avatar" style="background:#4f7cac">태</div>
+      <div class="body">
+        <div class="name">강태현</div>
+        <div class="row"><div class="bubble">순두부 먹자 신촌에 잘하는 데 있음 👍</div><div class="meta"><span class="time">오후 10:09</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="input">
+    <svg width="20" height="20" viewBox="0 0 20 20"><path d="M10 2 V18 M2 10 H18" stroke="#333" stroke-width="2" stroke-linecap="round"/></svg>
+    <div class="field"></div>
+    <svg width="22" height="22" viewBox="0 0 22 22"><circle cx="11" cy="11" r="9" stroke="#333" stroke-width="1.8" fill="none"/><circle cx="7.8" cy="9" r="1.2" fill="#333"/><circle cx="14.2" cy="9" r="1.2" fill="#333"/><path d="M6.8 13 Q11 16.5 15.2 13" stroke="#333" stroke-width="1.7" fill="none" stroke-linecap="round"/></svg>
+    <svg width="20" height="20" viewBox="0 0 20 20"><path d="M7 2 L5 18 M15 2 L13 18 M2 7 H18 M2 13 H18" stroke="#333" stroke-width="1.9" stroke-linecap="round"/></svg>
+  </div>
+</div>
+</body>
+</html>
