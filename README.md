@@ -37,4 +37,9 @@ Trainthon 해커톤 MVP (2026-09-09~10, 최종 피칭 9/10 10:00). 앱 코드는
 
 ## Run
 
-앱이 생기면 여기에 `npm install` / `npm run dev`를 적는다. 지금은 문서만 있다.
+```
+cp .env.local.example .env.local   # GEMINI_API_KEY, SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, DATABASE_URL 채우기
+npm install
+npm run seed                       # schema.sql 재실행 + 시드 31명 + 더미 800 (= 리셋)
+npm run dev
+```

@@ -1,7 +1,7 @@
 # MyHR — 무대·심사 준비
 
 Trainthon (연세대 AI 창업캠프 999) 본선. 강릉 Skybay Hotel Gyeongpo, 2026-09-09~10. 솔로, ~20 개발시간.
-데모 스크립트·프리셋 질문·빌드 순서는 [PRODUCT.md](PRODUCT.md) §8, §10. 여기엔 그 밖의 것만.
+데모 스크립트·프리셋 질문·빌드 순서는 [PRODUCT.md](PRODUCT.md) §8, §10. 슬라이드 10장·대사·데모 60초 콘티는 [SLIDES.md](SLIDES.md). 여기엔 그 밖의 것만.
 
 ## 마감
 

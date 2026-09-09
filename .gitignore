@@ -2,3 +2,17 @@ agent-tools/
 node_modules/
 .DS_Store
 *.log
+
+# next.js
+/.next/
+/out/
+/build
+*.tsbuildinfo
+next-env.d.ts
+
+# env
+.env*
+!.env.local.example
+
+# vercel
+.vercel

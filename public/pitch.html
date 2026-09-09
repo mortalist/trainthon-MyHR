@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MyHR — Trainthon 발표</title>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+  <link rel="stylesheet" as="style" crossorigin
+    href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #12151a;
+      --ink-soft: #3a4250;
+      --mute: #6b7380;
+      --paper: #f3f1ec;
+      --paper-2: #e7e4dc;
+      --line: #d4d0c6;
+      --accent: #0d6e6e;
+      --accent-soft: #d7efef;
+      --warn: #c45c26;
+      --phone: #1c1f26;
+      --ok: #1a7a4c;
+      --dur-title: 5s;
+      --dur-body: 15s;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      height: 100%;
+      overflow: hidden;
+      font-family: "Pretendard Variable", Pretendard, "Apple SD Gothic Neo", sans-serif;
+      background: var(--ink);
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .deck {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      background:
+        radial-gradient(1200px 700px at 12% -10%, #2a4a4a 0%, transparent 55%),
+        radial-gradient(900px 600px at 100% 100%, #3a2e1f 0%, transparent 50%),
+        linear-gradient(160deg, #0f1217 0%, #1a1e26 55%, #14181f 100%);
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      padding: clamp(1.5rem, 4vw, 3.5rem);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(10px);
+      transition: opacity 0.45s ease, transform 0.45s ease, visibility 0.45s;
+      pointer-events: none;
+    }
+
+    .slide.active {
+      opacity: 1;
+      visibility: visible;
+      transform: none;
+      pointer-events: auto;
+    }
+
+    .panel {
+      width: min(1120px, 100%);
+      min-height: min(620px, 78vh);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.96), rgba(243,241,236,0.98));
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 28px;
+      box-shadow:
+        0 1px 0 rgba(255,255,255,0.25) inset,
+        0 40px 80px rgba(0,0,0,0.45);
+      padding: clamp(2rem, 5vw, 3.75rem);
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(18,21,26,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(18,21,26,0.03) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: linear-gradient(180deg, #000 0%, transparent 85%);
+      pointer-events: none;
+    }
+
+    .kicker {
+      font-size: 0.85rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 650;
+      position: relative;
+    }
+
+    h1, h2 {
+      font-family: "Instrument Serif", "Pretendard Variable", serif;
+      font-weight: 400;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      position: relative;
+    }
+
+    h1 { font-size: clamp(3rem, 7vw, 5.5rem); }
+    h2 { font-size: clamp(2.1rem, 4.6vw, 3.4rem); max-width: 18ch; }
+
+    .brand {
+      font-family: "Instrument Serif", serif;
+      font-size: clamp(4.5rem, 10vw, 7.5rem);
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+    }
+
+    .sub {
+      font-size: clamp(1.05rem, 2vw, 1.35rem);
+      color: var(--ink-soft);
+      max-width: 36ch;
+      line-height: 1.55;
+      position: relative;
+    }
+
+    .meta {
+      margin-top: auto;
+      display: flex;
+      gap: 1.25rem;
+      flex-wrap: wrap;
+      color: var(--mute);
+      font-size: 0.95rem;
+      position: relative;
+    }
+
+    .meta span::before {
+      content: "·";
+      margin-right: 1.25rem;
+      color: var(--line);
+    }
+    .meta span:first-child::before { content: none; margin: 0; }
+
+    /* compositions */
+    .row {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: clamp(1.25rem, 3vw, 2.5rem);
+      align-items: center;
+      flex: 1;
+      position: relative;
+      min-height: 0;
+    }
+
+    .row.solo { grid-template-columns: 1fr; }
+
+    .notif {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 1.25rem 1.4rem;
+      display: grid;
+      grid-template-columns: 48px 1fr auto;
+      gap: 0.9rem;
+      align-items: center;
+      box-shadow: 0 12px 30px rgba(18,21,26,0.08);
+      max-width: 420px;
+      animation: float-in 0.7s ease both;
+    }
+
+    .avatar {
+      width: 48px; height: 48px;
+      border-radius: 14px;
+      background: linear-gradient(145deg, #d7efef, #9ecfcf);
+      display: grid; place-items: center;
+      font-weight: 700; color: var(--accent);
+    }
+
+    .notif strong { display: block; font-size: 1rem; }
+    .notif p { color: var(--ink-soft); font-size: 0.95rem; margin-top: 0.15rem; }
+    .notif time { color: var(--mute); font-size: 0.8rem; }
+
+    .qmark {
+      font-family: "Instrument Serif", serif;
+      font-size: 5rem;
+      color: var(--warn);
+      line-height: 1;
+      margin-top: 0.75rem;
+      animation: pulse 2.2s ease-in-out infinite;
+    }
+
+    .flow {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+      align-items: center;
+      margin-top: 0.5rem;
+    }
+
+    .chip {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 0.55rem 1rem;
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+
+    .arrow { color: var(--mute); font-size: 1.1rem; }
+
+    .note-pill {
+      display: inline-flex;
+      margin-top: 1.25rem;
+      background: var(--accent-soft);
+      color: var(--accent);
+      border-radius: 999px;
+      padding: 0.45rem 0.9rem;
+      font-size: 0.9rem;
+      font-weight: 650;
+    }
+
+    /* phone mock */
+    .phone {
+      width: min(280px, 100%);
+      margin-inline: auto;
+      background: var(--phone);
+      border-radius: 28px;
+      padding: 12px;
+      box-shadow: 0 24px 50px rgba(0,0,0,0.28);
+      color: #f5f6f8;
+    }
+
+    .phone-screen {
+      background: #f7f6f2;
+      color: var(--ink);
+      border-radius: 20px;
+      overflow: hidden;
+      min-height: 420px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .phone-top {
+      padding: 0.85rem 0.9rem 0.55rem;
+      border-bottom: 1px solid var(--line);
+      background: #fff;
+    }
+
+    .phone-top .app-name {
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    .search {
+      margin-top: 0.55rem;
+      background: #eeebe4;
+      border-radius: 10px;
+      padding: 0.45rem 0.7rem;
+      font-size: 0.82rem;
+      color: var(--ink-soft);
+    }
+
+    .search em {
+      font-style: normal;
+      color: var(--accent);
+      font-weight: 650;
+    }
+
+    .person {
+      display: grid;
+      grid-template-columns: 36px 1fr;
+      gap: 0.65rem;
+      padding: 0.7rem 0.9rem;
+      border-bottom: 1px solid #ebe7de;
+      background: #fff;
+    }
+
+    .person .dot {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: #dfe9e9;
+      display: grid; place-items: center;
+      font-size: 0.75rem; font-weight: 700; color: var(--accent);
+    }
+
+    .person strong { font-size: 0.88rem; display: block; }
+    .person span { font-size: 0.72rem; color: var(--mute); }
+    .reason {
+      grid-column: 2;
+      font-size: 0.7rem;
+      color: var(--accent);
+      margin-top: 0.15rem;
+    }
+
+    /* kakao + cards */
+    .kakao {
+      background: #b8c9d4;
+      border-radius: 16px;
+      padding: 0.85rem;
+      font-size: 0.78rem;
+      max-width: 260px;
+    }
+
+    .kakao .room {
+      text-align: center;
+      font-weight: 700;
+      margin-bottom: 0.55rem;
+      color: #24313a;
+    }
+
+    .bubble {
+      background: #fff;
+      border-radius: 8px;
+      padding: 0.4rem 0.55rem;
+      margin: 0.35rem 0;
+      max-width: 85%;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.06);
+    }
+
+    .bubble.me {
+      margin-left: auto;
+      background: #fee500;
+    }
+
+    .bubble b { display: block; font-size: 0.68rem; color: #556; margin-bottom: 0.1rem; }
+
+    .keycap {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      margin-top: 0.75rem;
+      background: var(--ink);
+      color: #fff;
+      border-radius: 8px;
+      padding: 0.35rem 0.65rem;
+      font-size: 0.8rem;
+      font-family: ui-monospace, monospace;
+    }
+
+    .cards { display: flex; flex-direction: column; gap: 0.55rem; }
+
+    .card {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 0.75rem 0.9rem;
+      box-shadow: 0 8px 18px rgba(18,21,26,0.06);
+      transform: rotate(-1.2deg);
+    }
+    .card:nth-child(2) { transform: rotate(1deg) translateX(8px); }
+    .card:nth-child(3) { transform: rotate(-0.5deg) translateX(4px); }
+    .card strong { display: block; margin-bottom: 0.25rem; }
+    .card code {
+      display: block;
+      font-size: 0.72rem;
+      color: var(--accent);
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    }
+
+    /* table */
+    .table-wrap {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      overflow: hidden;
+      font-size: 0.85rem;
+      box-shadow: 0 10px 24px rgba(18,21,26,0.06);
+    }
+
+    table { width: 100%; border-collapse: collapse; }
+    th, td {
+      text-align: left;
+      padding: 0.7rem 0.85rem;
+      border-bottom: 1px solid var(--line);
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.78rem;
+    }
+    th {
+      background: #f0eee8;
+      font-family: "Pretendard Variable", sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--mute);
+    }
+    tr:last-child td { border-bottom: 0; }
+    .badge {
+      display: inline-block;
+      margin-top: 0.85rem;
+      background: var(--ink);
+      color: #fff;
+      border-radius: 8px;
+      padding: 0.45rem 0.75rem;
+      font-size: 0.85rem;
+      font-weight: 650;
+    }
+
+    /* timeline */
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+      position: relative;
+    }
+
+    .tl-item {
+      display: grid;
+      grid-template-columns: 52px 1fr;
+      gap: 0.75rem;
+      align-items: start;
+    }
+
+    .tl-item .when {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--accent);
+      padding-top: 0.55rem;
+    }
+
+    .tl-item .body {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 0.65rem 0.85rem;
+    }
+
+    .tl-item .memo { font-size: 0.88rem; margin-bottom: 0.25rem; }
+    .tl-item code {
+      font-size: 0.72rem;
+      color: var(--ink-soft);
+      font-family: ui-monospace, Menlo, monospace;
+    }
+    .tl-item.highlight .body {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+    }
+    .tag {
+      display: inline-block;
+      margin-left: 0.35rem;
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: var(--warn);
+      vertical-align: middle;
+    }
+
+    /* roster */
+    .roster {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.75rem;
+    }
+    .roster span {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 0.3rem 0.65rem;
+      font-size: 0.78rem;
+    }
+    .sql {
+      margin-top: 1rem;
+      font-family: ui-monospace, Menlo, monospace;
+      font-size: 0.72rem;
+      color: var(--mute);
+      background: #f0eee8;
+      padding: 0.55rem 0.75rem;
+      border-radius: 8px;
+    }
+
+    /* moments (slide 8) */
+    .moments {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-top: 0.5rem;
+      position: relative;
+    }
+    .moment {
+      display: grid;
+      grid-template-columns: minmax(140px, 0.9fr) 1.4fr;
+      gap: 1rem;
+      align-items: center;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 1rem 1.2rem;
+      box-shadow: 0 8px 20px rgba(18,21,26,0.05);
+    }
+    .when-label {
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--ink-soft);
+    }
+    .query-chip {
+      background: var(--accent-soft);
+      color: var(--accent);
+      border-radius: 999px;
+      padding: 0.55rem 1rem;
+      font-weight: 700;
+      font-size: 0.95rem;
+      justify-self: start;
+    }
+
+    @media (max-width: 820px) {
+      .moment { grid-template-columns: 1fr; gap: 0.45rem; }
+    }
+
+    /* compare */
+    .compare {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+      background: #fff;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+    }
+    .compare th, .compare td {
+      padding: 0.85rem 1rem;
+      border-bottom: 1px solid var(--line);
+      text-align: center;
+      font-family: inherit;
+      font-size: 0.88rem;
+    }
+    .compare th:first-child, .compare td:first-child { text-align: left; }
+    .compare th {
+      background: #f0eee8;
+      font-size: 0.75rem;
+      text-transform: none;
+      letter-spacing: 0;
+      color: var(--ink-soft);
+    }
+    .compare tr:last-child td { border-bottom: 0; background: var(--accent-soft); font-weight: 700; }
+    .yes { color: var(--ok); font-weight: 700; }
+    .no { color: #b0b5bd; }
+
+    /* business */
+    .funnel {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 1rem;
+      align-items: stretch;
+      margin-top: 0.5rem;
+    }
+    .box {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 1.1rem 1.2rem;
+    }
+    .box h3 {
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--mute);
+      margin-bottom: 0.55rem;
+      font-weight: 700;
+    }
+    .box ul { list-style: none; }
+    .box li {
+      font-size: 1rem;
+      padding: 0.25rem 0;
+      font-weight: 600;
+    }
+    .funnel .mid {
+      align-self: center;
+      font-size: 1.5rem;
+      color: var(--accent);
+    }
+    .price {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+    .price span {
+      background: var(--ink);
+      color: #fff;
+      border-radius: 999px;
+      padding: 0.5rem 1rem;
+      font-size: 0.9rem;
+      font-weight: 650;
+    }
+    .price span.soft {
+      background: var(--accent-soft);
+      color: var(--accent);
+    }
+
+    /* chrome */
+    .progress {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: rgba(255,255,255,0.12);
+      z-index: 20;
+    }
+    .progress > i {
+      display: block;
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #5fd0c8, #e8b86d);
+      transition: width 0.05s linear;
+    }
+
+    .hud {
+      position: fixed;
+      left: 0; right: 0; bottom: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.75rem 1.25rem;
+      color: rgba(255,255,255,0.7);
+      font-size: 0.8rem;
+      z-index: 20;
+      pointer-events: none;
+    }
+
+    .hud kbd {
+      display: inline-block;
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 5px;
+      padding: 0.1rem 0.35rem;
+      font-size: 0.72rem;
+      margin: 0 0.1rem;
+    }
+
+    .speaker {
+      position: fixed;
+      left: 1rem;
+      right: 1rem;
+      bottom: 2.6rem;
+      background: rgba(18,21,26,0.88);
+      color: #f3f1ec;
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 14px;
+      padding: 0.85rem 1.1rem;
+      font-size: 0.95rem;
+      line-height: 1.45;
+      z-index: 25;
+      display: none;
+      backdrop-filter: blur(8px);
+    }
+    .speaker.on { display: block; }
+    .speaker label {
+      display: block;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #9aa3ad;
+      margin-bottom: 0.35rem;
+    }
+
+    @keyframes float-in {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: none; }
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 0.55; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.04); }
+    }
+
+    @media (max-width: 820px) {
+      .row { grid-template-columns: 1fr; }
+      .phone { max-width: 240px; }
+      .phone-screen { min-height: 320px; }
+      .funnel { grid-template-columns: 1fr; }
+      .funnel .mid { text-align: center; transform: rotate(90deg); }
+      h2 { max-width: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="progress"><i id="bar"></i></div>
+
+  <div class="deck" id="deck">
+
+    <!-- 0 -->
+    <section class="slide active" data-dur="5" data-note="MyHR, 당신 네트워크의 인사팀입니다.">
+      <div class="panel" style="justify-content:center; text-align:center; align-items:center;">
+        <p class="kicker">Trainthon · 연세대 AI 창업캠프 999</p>
+        <p class="brand">MyHR</p>
+        <p class="sub" style="text-align:center; max-width:22ch;">당신 네트워크의 인사팀</p>
+        <div class="meta" style="justify-content:center; margin-top:2rem;">
+          <span>정승현</span>
+          <span>연세대 나노과학공학과</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 1 -->
+    <section class="slide" data-dur="15" data-note="사람은 많이 만나는데 기억은 못 따라갑니다. 연락처엔 이름과 번호만 남고, 어디서 만났는지·근황·누구 소개였는지는 사라집니다.">
+      <div class="panel">
+        <p class="kicker">문제</p>
+        <div class="row">
+          <div>
+            <h2>이 사람,<br />누구였지?</h2>
+            <p class="sub" style="margin-top:1rem;">재회 직전 5초. 이름은 떠오르는데 맥락은 안 떠오른다.</p>
+          </div>
+          <div>
+            <div class="notif">
+              <div class="avatar">재</div>
+              <div>
+                <strong>김재희</strong>
+                <p>형 오랜만이에요!</p>
+              </div>
+              <time>지금</time>
+            </div>
+            <div class="qmark">?</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2 -->
+    <section class="slide" data-dur="15" data-note="창업 동아리, 학회, 해커톤. 한 학기에 백 명씩 스치는 사람들입니다. 오늘 이 방이 첫 사용자입니다.">
+      <div class="panel">
+        <p class="kicker">타겟</p>
+        <h2>소개·행사·커뮤니티를<br />넘나드는 사람</h2>
+        <div class="flow">
+          <span class="chip">동아리</span><span class="arrow">→</span>
+          <span class="chip">학회</span><span class="arrow">→</span>
+          <span class="chip">해커톤</span><span class="arrow">→</span>
+          <span class="chip">인턴</span>
+        </div>
+        <span class="note-pill">오늘 이 방에 있는 40명 전부</span>
+      </div>
+    </section>
+
+    <!-- 3 -->
+    <section class="slide" data-dur="15" data-note="앱을 열면 그냥 연락처 목록입니다. 딱 하나 다릅니다. 이름이 아니라 '매운 거 잘 먹는 사람'으로 검색이 됩니다.">
+      <div class="panel">
+        <p class="kicker">솔루션</p>
+        <div class="row">
+          <div>
+            <h2>맥락이 검색되는<br />연락처</h2>
+            <p class="sub" style="margin-top:1rem;">평범한 목록. 딱 하나 다르다.</p>
+          </div>
+          <div>
+            <div class="phone">
+              <div class="phone-screen">
+                <div class="phone-top">
+                  <div class="app-name">MyHR</div>
+                  <div class="search">검색 <em>매운거 잘 먹음</em></div>
+                </div>
+                <div class="person">
+                  <div class="dot">재</div>
+                  <div>
+                    <strong>김재희</strong>
+                    <span>핀테크 · 연끌</span>
+                    <div class="reason">likes_spicy = true</div>
+                  </div>
+                </div>
+                <div class="person">
+                  <div class="dot">민</div>
+                  <div>
+                    <strong>이민수</strong>
+                    <span>매연</span>
+                    <div class="reason">likes_spicy = true</div>
+                  </div>
+                </div>
+                <div class="person">
+                  <div class="dot">서</div>
+                  <div>
+                    <strong>박서연</strong>
+                    <span>트레인톤</span>
+                    <div class="reason">likes_spicy = true</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4 -->
+    <section class="slide" data-dur="15" data-note="카톡 캡처를 붙이면 AI가 누가 무슨 말을 했는지 읽어 사실 한 줄씩 뽑습니다. 사람 카드를 오른쪽으로 넘기면 저장. 스샷은 폐기됩니다.">
+      <div class="panel">
+        <p class="kicker">핵심 · 입력</p>
+        <div class="row">
+          <div>
+            <h2>폼 없음.<br />캡처가 입력이다</h2>
+            <div class="keycap">Ctrl + V</div>
+          </div>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; align-items:start;">
+            <div class="kakao">
+              <div class="room">트레인톤 999</div>
+              <div class="bubble"><b>재희</b>나 이번 주 풋살 감</div>
+              <div class="bubble me"><b>나</b>민수도 축구한다며</div>
+              <div class="bubble"><b>서연</b>매운거 먹으러 가자</div>
+            </div>
+            <div class="cards">
+              <div class="card">
+                <strong>김재희</strong>
+                <code>plays_soccer = true</code>
+              </div>
+              <div class="card">
+                <strong>이민수</strong>
+                <code>plays_soccer = true</code>
+              </div>
+              <div class="card">
+                <strong>박서연</strong>
+                <code>likes_spicy = true</code>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5 -->
+    <section class="slide" data-dur="15" data-note="사람 표가 아니라 사실 한 줄 표입니다. '재희가 축구한다'가 세상에 처음 등장해도 컬럼 추가 없이 INSERT 한 줄. AI가 키 목록을 재사용해 키웁니다.">
+      <div class="panel">
+        <p class="kicker">핵심 · 저장</p>
+        <div class="row">
+          <div>
+            <h2>사람을 저장하지<br />않는다.<br />문장을 저장한다</h2>
+            <div class="badge">ALTER TABLE 없음 · INSERT 한 줄</div>
+          </div>
+          <div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th>person</th><th>key</th><th>value</th><th>source</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td>재희</td><td>works_at</td><td>핀테크</td><td>#1</td></tr>
+                  <tr><td>재희</td><td>likes_spicy</td><td>true</td><td>#7</td></tr>
+                  <tr><td>재희</td><td>plays_soccer</td><td>true</td><td>#12</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6 -->
+    <section class="slide" data-dur="15" data-note="재희 메모 세 줄, 민수 메모 한 줄. 표는 한 번도 안 바뀌었는데 '축구'라는 개념이 생기고 두 사람에게 붙었습니다. 그래서 다음 화면의 질문이 가능해집니다.">
+      <div class="panel">
+        <p class="kicker">핵심 · 스키마가 자란다</p>
+        <div class="row">
+          <div>
+            <h2>메모가 쌓일수록<br />스키마가 자란다</h2>
+            <p class="sub" style="margin-top:1rem;">표 헤더는 끝까지 네 칸. 컬럼 추가 없음.</p>
+          </div>
+          <div class="timeline">
+            <div class="tl-item">
+              <div class="when">9/9</div>
+              <div class="body">
+                <div class="memo">「재희 핀테크 다님」</div>
+                <code>재희 · works_at · 핀테크</code>
+              </div>
+            </div>
+            <div class="tl-item">
+              <div class="when">9/12</div>
+              <div class="body">
+                <div class="memo">「재희 매운거 좋아함」</div>
+                <code>재희 · likes_spicy · true</code>
+              </div>
+            </div>
+            <div class="tl-item highlight">
+              <div class="when">9/20</div>
+              <div class="body">
+                <div class="memo">「재희랑 풋살 뛰었다」 <span class="tag">세상 첫 등장</span></div>
+                <code>재희 · plays_soccer · true</code>
+              </div>
+            </div>
+            <div class="tl-item highlight">
+              <div class="when">9/25</div>
+              <div class="body">
+                <div class="memo">「민수도 축구 함」 <span class="tag">키 재사용</span></div>
+                <code>민수 · plays_soccer · true</code>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7 -->
+    <section class="slide" data-dur="15" data-note="'주말 축구 할 사람 11명'이라고 물으면 명단과 근거가 나옵니다. 이건 SQL 한 줄입니다. AI는 입력을 읽을 때와 답을 말할 때, 양 끝에만 씁니다.">
+      <div class="panel">
+        <p class="kicker">핵심 · 질의</p>
+        <div class="row">
+          <div>
+            <h2>“주말 축구 11명”<br />→ 명단</h2>
+            <p class="sub" style="margin-top:1rem;">네트워크에 묻는다. LLM이 아니라 SQL이 먼저.</p>
+          </div>
+          <div>
+            <div class="box" style="padding:1.25rem;">
+              <h3>질문</h3>
+              <p style="font-weight:700; font-size:1.05rem;">이번 주말 축구 할 사람 11명 뽑아줘</p>
+              <div class="roster">
+                <span>김재희</span><span>이민수</span><span>박서연</span><span>최현우</span>
+                <span>정예린</span><span>한지호</span><span>윤서아</span><span>강도윤</span>
+                <span>오세진</span><span>신유진</span><span>배준혁</span>
+              </div>
+              <div class="sql">WHERE key='plays_soccer' AND value='true'</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8 -->
+    <section class="slide" data-dur="15" data-note="행사장에서 마주쳤을 때, 주말에 사람을 모을 때, 밥 약속 잡기 전. 이름이 안 떠올라도 '반도체 쪽', '축구', '매운거'로 바로 찾습니다. 그게 매일 쓰는 이유입니다.">
+      <div class="panel">
+        <p class="kicker">일상</p>
+        <h2>이름이 생각 안 나도,<br />관계는 찾을 수 있다</h2>
+        <div class="moments">
+          <div class="moment">
+            <div class="when-label">행사장에서 마주침</div>
+            <div class="query-chip">「지난번에 소개받은 반도체 쪽」</div>
+          </div>
+          <div class="moment">
+            <div class="when-label">주말에 사람 모을 때</div>
+            <div class="query-chip">「축구 할 사람 11명」</div>
+          </div>
+          <div class="moment">
+            <div class="when-label">밥 약속 잡기 전</div>
+            <div class="query-chip">「매운거 잘 먹는 사람」</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9 -->
+    <section class="slide" data-dur="15" data-note="대학 창업 커뮤니티에서 시작해 영업·VC·창업가로 갑니다. 50명까지 무료, 그 위는 월 9,900원. 목표는 모든 프로페셔널의 관계 기억 레이어입니다. 이제 데모입니다.">
+      <div class="panel">
+        <p class="kicker">사업화</p>
+        <h2>모든 프로페셔널의<br />인간관계 기억 레이어</h2>
+        <div class="funnel">
+          <div class="box">
+            <h3>웨지</h3>
+            <ul>
+              <li>창업 동아리</li>
+              <li>학회</li>
+              <li>해커톤</li>
+            </ul>
+          </div>
+          <div class="mid">→</div>
+          <div class="box">
+            <h3>확장</h3>
+            <ul>
+              <li>영업 · PR</li>
+              <li>VC · 창업가</li>
+              <li>취준생</li>
+            </ul>
+          </div>
+        </div>
+        <div class="price">
+          <span class="soft">무료 50명</span>
+          <span>Pro ₩9,900 / 월</span>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="speaker" id="speaker">
+    <label>대사 · S로 토글</label>
+    <div id="noteText"></div>
+  </div>
+
+  <div class="hud">
+    <div><kbd>←</kbd><kbd>→</kbd> 이동 · <kbd>Space</kbd> 일시정지 · <kbd>S</kbd> 대사 · <kbd>F</kbd> 전체화면</div>
+    <div id="counter">1 / 10</div>
+  </div>
+
+  <script>
+    const slides = [...document.querySelectorAll(".slide")];
+    const bar = document.getElementById("bar");
+    const counter = document.getElementById("counter");
+    const speaker = document.getElementById("speaker");
+    const noteText = document.getElementById("noteText");
+
+    let i = 0;
+    let paused = false;
+    let started = 0;
+    let elapsedBeforePause = 0;
+    let raf = null;
+
+    function durationMs() {
+      return (parseFloat(slides[i].dataset.dur) || 15) * 1000;
+    }
+
+    function show(n) {
+      slides[i].classList.remove("active");
+      i = (n + slides.length) % slides.length;
+      slides[i].classList.add("active");
+      counter.textContent = `${i + 1} / ${slides.length}`;
+      noteText.textContent = slides[i].dataset.note || "";
+      elapsedBeforePause = 0;
+      started = performance.now();
+      bar.style.width = "0%";
+    }
+
+    function tick(now) {
+      if (!paused) {
+        const dur = durationMs();
+        const t = elapsedBeforePause + (now - started);
+        const p = Math.min(1, t / dur);
+        bar.style.width = `${p * 100}%`;
+        if (p >= 1) {
+          if (i < slides.length - 1) show(i + 1);
+          else {
+            paused = true;
+            bar.style.width = "100%";
+          }
+        }
+      }
+      raf = requestAnimationFrame(tick);
+    }
+
+    function togglePause() {
+      if (paused) {
+        paused = false;
+        started = performance.now();
+      } else {
+        paused = true;
+        elapsedBeforePause += performance.now() - started;
+      }
+    }
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowRight" || e.key === "PageDown") {
+        e.preventDefault();
+        show(i + 1);
+      } else if (e.key === "ArrowLeft" || e.key === "PageUp") {
+        e.preventDefault();
+        show(i - 1);
+      } else if (e.key === " " || e.code === "Space") {
+        e.preventDefault();
+        togglePause();
+      } else if (e.key === "s" || e.key === "S") {
+        speaker.classList.toggle("on");
+      } else if (e.key === "f" || e.key === "F") {
+        if (!document.fullscreenElement) document.documentElement.requestFullscreen?.();
+        else document.exitFullscreen?.();
+      } else if (e.key === "Home") {
+        show(0);
+      } else if (e.key === "0") {
+        // restart autoplay from current
+        elapsedBeforePause = 0;
+        started = performance.now();
+        paused = false;
+      }
+    });
+
+    // click to advance (except on speaker)
+    document.getElementById("deck").addEventListener("click", () => show(i + 1));
+
+    noteText.textContent = slides[0].dataset.note;
+    started = performance.now();
+    raf = requestAnimationFrame(tick);
+  </script>
+</body>
+</html>
