@@ -333,6 +333,23 @@
 
     .bubble b { display: block; font-size: 0.68rem; color: #556; margin-bottom: 0.1rem; }
 
+    .source-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+      margin-top: 1rem;
+      position: relative;
+    }
+    .source-chip {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 0.45rem 0.75rem;
+      font-size: 0.88rem;
+      font-weight: 650;
+      color: var(--ink-soft);
+    }
+
     .keycap {
       display: inline-flex;
       align-items: center;
@@ -783,34 +800,33 @@
     </section>
 
     <!-- 4 -->
-    <section class="slide" data-dur="15" data-note="카톡 캡처를 붙이면 AI가 누가 무슨 말을 했는지 읽어 사실 한 줄씩 뽑습니다. 사람 카드를 오른쪽으로 넘기면 저장. 스샷은 폐기됩니다.">
+    <section class="slide" data-dur="15" data-note="카톡 캡처, 명함, 링크드인 페이지, 짧은 메모. 붙여넣기나 공유 한 번이면 AI가 사실 한 줄로 뽑습니다. 칸을 채울 필요 없습니다.">
       <div class="panel">
         <p class="kicker">핵심 · 입력</p>
         <div class="row">
           <div>
-            <h2>폼 없음.<br />캡처가 입력이다</h2>
-            <div class="keycap">Ctrl + V</div>
-          </div>
-          <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; align-items:start;">
-            <div class="kakao">
-              <div class="room">트레인톤 999</div>
-              <div class="bubble"><b>재희</b>나 이번 주 풋살 감</div>
-              <div class="bubble me"><b>나</b>민수도 축구한다며</div>
-              <div class="bubble"><b>서연</b>매운거 먹으러 가자</div>
+            <h2>폼 없음.<br />한 번 붙이면 끝</h2>
+            <p class="sub" style="margin-top:0.85rem;">붙여넣기나 공유 한 번. 칸을 채우지 않는다.</p>
+            <div class="source-grid">
+              <span class="source-chip">카톡 스크린샷</span>
+              <span class="source-chip">명함</span>
+              <span class="source-chip">링크드인 페이지</span>
+              <span class="source-chip">평문 메모</span>
             </div>
-            <div class="cards">
-              <div class="card">
-                <strong>김재희</strong>
-                <code>plays_soccer = true</code>
-              </div>
-              <div class="card">
-                <strong>이민수</strong>
-                <code>plays_soccer = true</code>
-              </div>
-              <div class="card">
-                <strong>박서연</strong>
-                <code>likes_spicy = true</code>
-              </div>
+            <div class="keycap">붙여넣기 / 공유</div>
+          </div>
+          <div class="cards">
+            <div class="card">
+              <strong>김재희</strong>
+              <code>plays_soccer = true</code>
+            </div>
+            <div class="card">
+              <strong>이민수</strong>
+              <code>works_at = 핀테크</code>
+            </div>
+            <div class="card">
+              <strong>박서연</strong>
+              <code>likes_spicy = true</code>
             </div>
           </div>
         </div>
