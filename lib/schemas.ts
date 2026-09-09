@@ -19,8 +19,22 @@ export const ExtractResult = z.object({
     }),
   ),
   edges: z.array(z.object({ from: z.string(), to: z.string(), label: z.string() })),
+  raw_text: z.string(), // 노트/캡처의 평문 전사 → notes.raw_text
 });
 export type ExtractResult = z.infer<typeof ExtractResult>;
+
+// /api/extract 응답 = ExtractResult + 카드 UI용 부가 정보 (2번째 왕복 방지)
+export type ExtractResponse = ExtractResult & {
+  candidates: { id: string; name: string }[]; // 사람 바꾸기 select용 (더미 제외)
+  existing: Record<string, { key: string; value: string }[]>; // 기존 사람의 현재 속성 (before → after)
+};
+
+// 스와이프 카드 한 장 = 사람 하나 + 그 사람 속성/엣지. savePerson 입력.
+export type Card = {
+  person: ExtractResult["people"][number];
+  attributes: Omit<ExtractResult["attributes"][number], "person">[];
+  edges: ExtractResult["edges"];
+};
 
 export const AskResult = z.object({
   answer: z.string(),

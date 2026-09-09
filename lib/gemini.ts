@@ -17,6 +17,26 @@ export function imagePart(dataUrl: string): InteractionInput {
   return { type: "image", data, mime_type: meta.slice("data:".length, meta.indexOf(";")) };
 }
 
+// Zod JSON Schema → Gemini Interactions schema (nullable 플래그, $schema 제거)
+function toGeminiSchema(schema: z.ZodTypeAny): Record<string, unknown> {
+  const walk = (node: unknown): unknown => {
+    if (Array.isArray(node)) return node.map(walk);
+    if (!node || typeof node !== "object") return node;
+    const o = { ...(node as Record<string, unknown>) };
+    delete o.$schema;
+    delete o.additionalProperties;
+    if (Array.isArray(o.type) && o.type.includes("null")) {
+      o.type = (o.type as string[]).find((t) => t !== "null") ?? "string";
+      o.nullable = true;
+    }
+    for (const [k, v] of Object.entries(o)) {
+      if (typeof v === "object" && v !== null) o[k] = walk(v);
+    }
+    return o;
+  };
+  return walk(z.toJSONSchema(schema)) as Record<string, unknown>;
+}
+
 // JSON 스키마 강제 생성 → Zod로 검증해 반환. /extract, /ask가 쓴다.
 export async function generateJson<T extends z.ZodTypeAny>(
   schema: T,
@@ -27,8 +47,9 @@ export async function generateJson<T extends z.ZodTypeAny>(
     model: MODEL,
     input,
     system_instruction: systemInstruction,
-    response_format: { type: "text", mime_type: "application/json", schema: z.toJSONSchema(schema) },
-    generation_config: { thinking_level: "minimal" },
+    response_format: { type: "text", mime_type: "application/json", schema: toGeminiSchema(schema) },
+    // gemini-3.7-flash: minimal 미지원 → low가 최소
+    generation_config: { thinking_level: "low" },
   });
   return schema.parse(JSON.parse(r.output_text ?? ""));
 }
