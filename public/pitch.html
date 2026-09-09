@@ -421,6 +421,46 @@
       font-weight: 650;
     }
 
+    .key-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.85rem;
+    }
+    .key-cloud span {
+      background: var(--accent-soft);
+      color: var(--accent);
+      border-radius: 8px;
+      padding: 0.28rem 0.55rem;
+      font-size: 0.72rem;
+      font-family: ui-monospace, Menlo, monospace;
+      font-weight: 650;
+    }
+    .key-cloud .dim {
+      background: #f0eee8;
+      color: var(--mute);
+    }
+    .askable {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.85rem;
+    }
+    .askable span {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 0.35rem 0.7rem;
+      font-size: 0.78rem;
+      font-weight: 650;
+      color: var(--ink-soft);
+    }
+    .table-wrap.dense td, .table-wrap.dense th {
+      padding: 0.45rem 0.65rem;
+      font-size: 0.7rem;
+    }
+    .table-wrap.dense th { font-size: 0.65rem; }
+
     /* timeline */
     .timeline {
       display: flex;
@@ -834,26 +874,48 @@
     </section>
 
     <!-- 5 -->
-    <section class="slide" data-dur="15" data-note="사람 표가 아니라 사실 한 줄 표입니다. '재희가 축구한다'가 세상에 처음 등장해도 컬럼 추가 없이 INSERT 한 줄. AI가 키 목록을 재사용해 키웁니다.">
+    <section class="slide" data-dur="15" data-note="사람 표가 아니라 사실 한 줄 표입니다. 전화번호, 직장, 학교, 취향, 만난 곳, 근황 — 미리 칸을 안 만들어도 AI가 키를 만들고 같은 키를 재사용합니다.">
       <div class="panel">
         <p class="kicker">핵심 · 저장</p>
         <div class="row">
           <div>
             <h2>사람을 저장하지<br />않는다.<br />문장을 저장한다</h2>
+            <p class="sub" style="margin-top:0.75rem;">미리 칸을 안 그린다. AI가 키를 키운다.</p>
             <div class="badge">ALTER TABLE 없음 · INSERT 한 줄</div>
           </div>
           <div>
-            <div class="table-wrap">
+            <div class="table-wrap dense">
               <table>
                 <thead>
-                  <tr><th>person</th><th>key</th><th>value</th><th>source</th></tr>
+                  <tr><th>person</th><th>key</th><th>value</th></tr>
                 </thead>
                 <tbody>
-                  <tr><td>재희</td><td>works_at</td><td>핀테크</td><td>#1</td></tr>
-                  <tr><td>재희</td><td>likes_spicy</td><td>true</td><td>#7</td></tr>
-                  <tr><td>재희</td><td>plays_soccer</td><td>true</td><td>#12</td></tr>
+                  <tr><td>재희</td><td>phone</td><td>010-2345-6789</td></tr>
+                  <tr><td>재희</td><td>works_at</td><td>핀테크 스타트업</td></tr>
+                  <tr><td>재희</td><td>job_title</td><td>프로덕트 매니저</td></tr>
+                  <tr><td>재희</td><td>likes_spicy</td><td>true</td></tr>
+                  <tr><td>재희</td><td>plays_soccer</td><td>true</td></tr>
+                  <tr><td>민수</td><td>phone</td><td>010-1234-5678</td></tr>
+                  <tr><td>민수</td><td>university</td><td>연세대</td></tr>
+                  <tr><td>서연</td><td>interested_in</td><td>반도체</td></tr>
+                  <tr><td>서연</td><td>met_at</td><td>트레인톤</td></tr>
+                  <tr><td>채원</td><td>status</td><td>다음 달 카카오 이직</td></tr>
                 </tbody>
               </table>
+            </div>
+            <div class="key-cloud">
+              <span>phone</span>
+              <span>works_at</span>
+              <span>job_title</span>
+              <span>university</span>
+              <span>major</span>
+              <span>likes_spicy</span>
+              <span>plays_soccer</span>
+              <span>interested_in</span>
+              <span>lives_in</span>
+              <span>met_at</span>
+              <span>status</span>
+              <span class="dim">…새 메모마다 자람</span>
             </div>
           </div>
         </div>
@@ -861,13 +923,20 @@
     </section>
 
     <!-- 6 -->
-    <section class="slide" data-dur="15" data-note="재희 메모 세 줄, 민수 메모 한 줄. 표는 한 번도 안 바뀌었는데 '축구'라는 개념이 생기고 두 사람에게 붙었습니다. 그래서 다음 화면의 질문이 가능해집니다.">
+    <section class="slide" data-dur="15" data-note="표 헤더는 끝까지 네 칸입니다. 메모가 쌓일수록 키만 늘어나고, 그 키로 바로 검색·질문이 됩니다.">
       <div class="panel">
         <p class="kicker">핵심 · 스키마가 자란다</p>
         <div class="row">
           <div>
             <h2>메모가 쌓일수록<br />스키마가 자란다</h2>
-            <p class="sub" style="margin-top:1rem;">표 헤더는 끝까지 네 칸. 컬럼 추가 없음.</p>
+            <p class="sub" style="margin-top:0.85rem;">표 헤더는 끝까지 네 칸. 컬럼 추가 없음.</p>
+            <p class="sub" style="margin-top:1rem; font-size:0.95rem; color:var(--mute);">그래서 물을 수 있는 것</p>
+            <div class="askable">
+              <span>「매운거 잘 먹는 사람」</span>
+              <span>「주말 축구 11명」</span>
+              <span>「반도체 쪽」</span>
+              <span>「연대 출신」</span>
+            </div>
           </div>
           <div class="timeline">
             <div class="tl-item">
