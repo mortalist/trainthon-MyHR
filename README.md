@@ -6,11 +6,20 @@
 
 앱을 열면 평범한 연락처 목록이다. 차이는 검색이 된다는 것 하나다.
 
-상세 스펙(문제, 데이터, 화면, 데모, 스택, 빌드 순서): **[docs/PRODUCT.md](docs/PRODUCT.md)**
+## Docs
+
+| 파일 | 역할 |
+| --- | --- |
+| [docs/PRODUCT.md](docs/PRODUCT.md) | **정본 스펙.** 문제, 데이터 모델, 파이프라인, 화면, 데모, 스택, 빌드 순서. 구현은 이걸 따른다 |
+| [docs/DECISIONS.md](docs/DECISIONS.md) | 결정 로그. 버린 대안과 이유 |
+| [docs/PITCH.md](docs/PITCH.md) | 마감, 준비 체크리스트, 심사 Q&A, 사업 모델 |
+| [docs/AGENT.md](docs/AGENT.md) | 코딩 에이전트 규칙 설치 |
+
+새 결정이 나면 PRODUCT.md를 고치고 DECISIONS.md에 한 줄 남긴다. 다른 곳에 기획을 두지 않는다.
 
 ## Status
 
-Trainthon 해커톤 MVP. 앱 코드는 아직 없다. 제품 정의는 [docs/PRODUCT.md](docs/PRODUCT.md).
+Trainthon 해커톤 MVP (2026-09-09~10, 최종 피칭 9/10 10:00). 앱 코드는 아직 없다.
 
 의도한 GitHub: [github.com/mortalist/trainthon-MyHR](https://github.com/mortalist/trainthon-MyHR)
 
